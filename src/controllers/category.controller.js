@@ -7,6 +7,11 @@ const postCategory = async (req, res) => {
   res.status(mapStatusHTTP(serviceResponse.status)).json(serviceResponse.data);
 };
 
+const findAll = async (_req, res) => {
+  const serviceResponse = await CategoryService.findAll();
+  res.status(mapStatusHTTP(serviceResponse.status)).json(serviceResponse.data);
+};
 module.exports = {
   postCategory,
+  findAll,
 };

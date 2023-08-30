@@ -5,6 +5,12 @@ const postCategory = async (name) => {
   return { status: 'CREATED', data: insert };
 };
 
+const findAll = async () => {
+  const categories = await db.Category.findAll();
+  return { status: 'SUCCESSFUL', data: categories };
+};
+
 module.exports = {
   postCategory,
+  findAll,
 };
