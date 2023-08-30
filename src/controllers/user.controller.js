@@ -23,8 +23,15 @@ const getAllUsers = async (req, res) => {
   res.status(mapStatusHTTP(serviceResponse.status)).json(serviceResponse.data);
 };
 
+const getOneUser = async (req, res) => {
+  const { id } = req.params;
+  const serviceResponse = await userService.findById(id);
+  res.status(mapStatusHTTP(serviceResponse.status)).json(serviceResponse.data);
+};
+
 module.exports = {
   postLogin,
   getAllUsers,
   postUser,
+  getOneUser,
 };

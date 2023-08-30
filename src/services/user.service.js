@@ -35,14 +35,21 @@ const createUser = async (userObj) => {
 };
 
 const findAll = async () => {
-  const users = await db.User.findAll({
-    attributes: ['displayName', 'email', 'password', 'image'],
-  });
+  const users = await db.User.findAll();
   return { status: 'SUCCESSFUL', data: users };
+};
+
+const findById = async (id) => {
+  const user = await db.User.findByPk(id);
+  if (!user) {
+    return { status: 'NOT_FOUND', data: { message: 'User does not exist' } };
+  }
+  return { status: 'SUCCESSFUL', data: user };
 };
 
 module.exports = {
   postLogin,
   createUser,
   findAll,
+  findById,
 };
