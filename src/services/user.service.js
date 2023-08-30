@@ -35,12 +35,16 @@ const createUser = async (userObj) => {
 };
 
 const findAll = async () => {
-  const users = await db.User.findAll();
+  const users = await db.User.findAll({
+    attributes: ['id', 'displayName', 'email', 'image'],
+  });
   return { status: 'SUCCESSFUL', data: users };
 };
 
 const findById = async (id) => {
-  const user = await db.User.findByPk(id);
+  const user = await db.User.findByPk(id, {
+    attributes: ['id', 'displayName', 'email', 'image'],
+  });
   if (!user) {
     return { status: 'NOT_FOUND', data: { message: 'User does not exist' } };
   }
