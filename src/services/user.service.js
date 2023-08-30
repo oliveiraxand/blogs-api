@@ -34,7 +34,15 @@ const createUser = async (userObj) => {
   return { status: 'CREATED', newUser, token };
 };
 
+const findAll = async () => {
+  const users = await db.User.findAll({
+    attributes: ['displayName', 'email', 'password', 'image'],
+  });
+  return { status: 'SUCCESSFUL', data: users };
+};
+
 module.exports = {
   postLogin,
   createUser,
+  findAll,
 };

@@ -1,5 +1,8 @@
+// const jwt = require('jsonwebtoken');
 const { userService } = require('../services');
 const mapStatusHTTP = require('../utils/mapHttpStatus');
+
+// const secret = process.env.JWT_SECRET || 'seusecretdetoken';
 
 const postLogin = (req, res) => {
   const { email } = req.body;
@@ -15,7 +18,13 @@ const postUser = async (req, res) => {
   res.status(mapStatusHTTP(serviceResponse.status)).json({ token: serviceResponse.token });
 };
 
+const getAllUsers = async (req, res) => {
+  const serviceResponse = await userService.findAll();
+  res.status(mapStatusHTTP(serviceResponse.status)).json(serviceResponse.data);
+};
+
 module.exports = {
   postLogin,
+  getAllUsers,
   postUser,
 };
