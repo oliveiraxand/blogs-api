@@ -2,12 +2,17 @@ const jwt = require('jsonwebtoken');
 const db = require('../models');
 
 const secret = process.env.JWT_SECRET || 'seusecretdetoken';
-const postLogin = (email) => {
+const findByEmail = async (email) => {
+  const user = await db.User.findOne({ where: { email } });
+  return user;
+};
+const postLogin = async (email) => {
   const jwtConfig = {
     expiresIn: '7d',
     algorithm: 'HS256',
   };
-  const token = jwt.sign({ data: { email } }, secret, jwtConfig);
+  const user = await findByEmail(email);
+  const token = jwt.sign({ id: user.dataValues.id, email }, secret, jwtConfig);
   return { status: 'SUCCESSFUL', data: { token } };
 };
 const createUser = async (userObj) => {
@@ -29,7 +34,8 @@ const createUser = async (userObj) => {
     expiresIn: '7d',
     algorithm: 'HS256',
   };
-  const token = jwt.sign({ data: { email } }, secret, jwtConfig);
+  const user = await findByEmail(email);
+  const token = jwt.sign({ id: user.dataValues.id, email }, secret, jwtConfig);
 
   return { status: 'CREATED', newUser, token };
 };
@@ -56,4 +62,5 @@ module.exports = {
   createUser,
   findAll,
   findById,
+  findByEmail,
 };

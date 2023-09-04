@@ -16,10 +16,12 @@ module.exports = {
         type: Sequelize.STRING
       },
       published: {
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP()')
       },
       updated: {
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP()')
       },
       user_id: {
         type:Sequelize.INTEGER,
@@ -29,7 +31,9 @@ module.exports = {
         },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
-      }
+      }, 
+    }, {
+      timestamps: false,
     })
   },
 

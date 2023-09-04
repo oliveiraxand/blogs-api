@@ -4,9 +4,9 @@ const mapStatusHTTP = require('../utils/mapHttpStatus');
 
 // const secret = process.env.JWT_SECRET || 'seusecretdetoken';
 
-const postLogin = (req, res) => {
+const postLogin = async (req, res) => {
   const { email } = req.body;
-  const serviceResponse = userService.postLogin(email);
+  const serviceResponse = await userService.postLogin(email);
 
   res.status(mapStatusHTTP(serviceResponse.status)).json(serviceResponse.data);
 };

@@ -12,7 +12,7 @@ const authenticateToken = (req, res, next) => {
     if (err) {
       return res.status(401).json({ message: 'Expired or invalid token' });
     }
-    req.user = decoded.data;
+    req.user = decoded;
     next();
   });
 };
