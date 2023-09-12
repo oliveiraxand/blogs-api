@@ -34,7 +34,27 @@ const getAll = async () => {
   return { status: 'SUCCESSFUL', data: postsWithUsers };
 };
 
+const getOne = async (id) => {
+  const post = await db.BlogPost.findByPk(id);
+  if (!post) {
+    return { status: 'NOT_FOUND', data: { message: 'Post does not exist' } };
+  }
+
+  const user = await findById(post.userId);
+  const categories = await findByPostId(post.id);
+
+  return {
+    status: 'SUCCESSFUL',
+    data: {
+      ...post.toJSON(),
+      user: user.data,
+      categories: categories.data,
+    },
+  };
+};
+
 module.exports = {
   postPost,
   getAll,
+  getOne,
 };
