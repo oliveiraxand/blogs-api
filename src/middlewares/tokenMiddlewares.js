@@ -7,7 +7,6 @@ const authenticateToken = (req, res, next) => {
   if (!authHeader) {
     return res.status(401).json({ message: 'Token not found' });
   }
-
   jwt.verify(token, secret, (err, decoded) => {
     if (err) {
       return res.status(401).json({ message: 'Expired or invalid token' });
