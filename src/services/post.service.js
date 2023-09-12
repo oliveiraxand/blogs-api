@@ -15,7 +15,6 @@ const postPost = async (postBody) => {
   await postPostCategories(insert.id, postBody.categoryIds);
   return { status: 'CREATED', data: insert };
 };
-
 const getAll = async () => {
   const posts = await db.BlogPost.findAll();
   const postsWithUsers = await Promise.all(posts.map(async (post) => {
@@ -27,7 +26,6 @@ const getAll = async () => {
   }));
   return { status: 'SUCCESSFUL', data: postsWithUsers };
 };
-
 const getOne = async (id) => {
   const post = await db.BlogPost.findByPk(id);
   if (!post) {
@@ -43,13 +41,11 @@ data: { ...post
 user: user.data,
 categories: categories.data } };
 };
-
 const editPost = async (postBody, id) => {
   await db.BlogPost.update({ title: postBody.title, content: postBody.content }, { where: { id } });
   const updatedPost = await getOne(id);
   return { status: 'SUCCESSFUL', data: updatedPost.data };
 };
-
 const deletePost = async (id) => {
   try {
     await db.sequelize.transaction(async (transaction) => {
@@ -57,8 +53,7 @@ const deletePost = async (id) => {
       await db.BlogPost.destroy({ where: { id }, transaction });
     });
   } catch (error) {
-    // Trate o erro aqui, você pode registrar ou fazer algo adequado com o erro.
+    console.error(error);
   }
 };
-
 module.exports = { postPost, getAll, getOne, editPost, deletePost };
