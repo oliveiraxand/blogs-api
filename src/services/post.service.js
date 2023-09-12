@@ -35,11 +35,12 @@ const getOne = async (id) => {
     findById(post.userId),
     findByPostId(post.id),
   ]);
-  return { status: 'SUCCESSFUL',
-data: { ...post
-    .toJSON(),
-user: user.data,
-categories: categories.data } };
+  return { 
+    status: 'SUCCESSFUL',
+    data: { ...post
+        .toJSON(),
+    user: user.data,
+    categories: categories.data } };
 };
 const editPost = async (postBody, id) => {
   await db.BlogPost.update({ title: postBody.title, content: postBody.content }, { where: { id } });

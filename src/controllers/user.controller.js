@@ -29,9 +29,16 @@ const getOneUser = async (req, res) => {
   res.status(mapStatusHTTP(serviceResponse.status)).json(serviceResponse.data);
 };
 
+const deleteMe = async (req, res) => {
+  const { id } = req.user;
+  await userService.deleteMe(id);
+  res.status(204).end();
+};
+
 module.exports = {
   postLogin,
   getAllUsers,
   postUser,
   getOneUser,
+  deleteMe,
 };

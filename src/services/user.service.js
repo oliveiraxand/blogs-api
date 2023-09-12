@@ -46,10 +46,15 @@ const findById = async (id) => {
   return { status: 'SUCCESSFUL', data: user };
 };
 
-module.exports = {
-  postLogin,
-  createUser,
-  findAll,
-  findById,
-  findByEmail,
+const deleteMe = async (id) => {
+  try {
+    await db.sequelize.transaction(async (transaction) => {
+      await db.BlogPost.destroy({ where: { userId: id }, transaction });
+      await db.User.destroy({ where: { id }, transaction });
+    });
+  } catch (error) {
+    console.error(error);
+  }
 };
+
+module.exports = { postLogin, createUser, findAll, findById, findByEmail, deleteMe };

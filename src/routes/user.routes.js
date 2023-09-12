@@ -9,4 +9,5 @@ router.post('/user', userMiddlewares.validateFormatEmail, userMiddlewares
   .validateEmail, userController.postUser);
 router.get('/user/:id', tokenMiddlewares.authenticateToken, userController.getOneUser);
 router.get('/user', tokenMiddlewares.authenticateToken, userController.getAllUsers);
+router.delete('/user/me', tokenMiddlewares.authenticateToken, userController.deleteMe);
 module.exports = router;
