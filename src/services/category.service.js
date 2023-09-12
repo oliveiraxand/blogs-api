@@ -10,7 +10,13 @@ const findAll = async () => {
   return { status: 'SUCCESSFUL', data: categories };
 };
 
+const findById = async (id) => {
+  const categorie = await db.Category.findByPk(id);
+  return { status: 'SUCCESSFUL', data: categorie };
+};
+
 module.exports = {
   postCategory,
   findAll,
+  findById,
 };

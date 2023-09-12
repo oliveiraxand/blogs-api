@@ -9,6 +9,12 @@ const postPost = async (req, res) => {
   res.status(mapStatusHTTP(serviceResponse.status)).json(serviceResponse.data);
 };
 
+const getAll = async (req, res) => {
+  const serviceResponse = await postService.getAll();
+  res.status(mapStatusHTTP(serviceResponse.status)).json(serviceResponse.data);
+};
+
 module.exports = {
   postPost,
+  getAll,
 };
