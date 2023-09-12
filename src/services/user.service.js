@@ -23,20 +23,13 @@ const createUser = async (userObj) => {
     email,
     password,
   };
-
   if (image) {
     userData.image = image;
   }
-
   const newUser = await db.User.create(userData);
-
-  const jwtConfig = {
-    expiresIn: '7d',
-    algorithm: 'HS256',
-  };
+  const jwtConfig = { expiresIn: '7d', algorithm: 'HS256' };
   const user = await findByEmail(email);
   const token = jwt.sign({ id: user.dataValues.id, email }, secret, jwtConfig);
-
   return { status: 'CREATED', newUser, token };
 };
 
