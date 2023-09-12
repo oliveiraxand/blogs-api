@@ -4,7 +4,6 @@ const { findById } = require('./category.service');
 const findByPostId = async (id) => {
   const categories = await db.PostCategory.findAll({ where: { postId: id } });
   const promises = await categories.map(async (categorie) => {
-    console.log(categorie);
     const category = await findById(categorie.dataValues.categoryId);
     return {
       id: category.data.id,
