@@ -39,4 +39,4 @@ Este projeto foi concluído como parte de um repositório de curso, porém, o c�
 
 Se precisar de mais alguma informação ou ajuda, estou disponível para contato.
 
-[Alexandre ] - [LinkedIn]()
+[Alexandre ] - <a href='https://www.linkedin.com/in/oliveira-xand/'>Linkedin<a>
